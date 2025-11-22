@@ -33,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
         if (state is AuthAuthenticated) {
           context.go('/products');
         } else if (state is AuthUnauthenticated) {
-          context.go('/login');
+          context.go('/products');
         }
       },
       child: Scaffold(

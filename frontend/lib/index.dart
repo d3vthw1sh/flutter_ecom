@@ -77,7 +77,7 @@ export 'presentation/widgets/custom_field.dart';
 
 // Core
 export 'core/constants.dart';
-export 'core/config.dart';
+
 export 'core/theme.dart';
 export 'core/utils.dart';
 

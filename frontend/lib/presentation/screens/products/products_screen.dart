@@ -4,6 +4,9 @@ import 'package:go_router/go_router.dart';
 import '../../../logic/blocs/products/products_bloc.dart';
 import '../../../logic/blocs/products/products_event.dart';
 import '../../../logic/blocs/products/products_state.dart';
+import '../../../logic/blocs/auth/auth_bloc.dart';
+import '../../../logic/blocs/auth/auth_event.dart';
+import '../../../logic/blocs/auth/auth_state.dart';
 import '../../widgets/product_card.dart';
 
 class ProductsScreen extends StatefulWidget {
@@ -32,16 +35,51 @@ class _ProductsScreenState extends State<ProductsScreen> {
       appBar: AppBar(
         title: const Text('Products'),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.shopping_cart),
-            onPressed: () {
-              Navigator.pushNamed(context, '/cart');
+          BlocBuilder<AuthBloc, AuthState>(
+            builder: (context, state) {
+              if (state is AuthAuthenticated) {
+                return Row(
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.shopping_cart),
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/cart');
+                      },
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.logout),
+                      onPressed: () {
+                        context.read<AuthBloc>().add(AuthLogoutRequested());
+                      },
+                    ),
+                  ],
+                );
+              } else {
+                return TextButton(
+                  onPressed: () {
+                    context.go('/login');
+                  },
+                  child: const Text(
+                    'Login',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                );
+              }
             },
           ),
         ],
       ),
-      body: BlocBuilder<ProductsBloc, ProductsState>(
-        builder: (context, state) {
+      body: BlocListener<AuthBloc, AuthState>(
+        listener: (context, state) {
+          if (state is AuthUnauthenticated) {
+            // Optional: Show a snackbar or just stay on the page (guest mode)
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Logged out successfully')),
+            );
+          }
+        },
+        child: BlocBuilder<ProductsBloc, ProductsState>(
+          builder: (context, state) {
           if (state is ProductsLoading) {
             return const Center(
               child: CircularProgressIndicator(),
@@ -108,7 +146,8 @@ class _ProductsScreenState extends State<ProductsScreen> {
           }
 
           return const SizedBox.shrink();
-        },
+          },
+        ),
       ),
     );
   }

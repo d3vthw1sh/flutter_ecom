@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: globalProviders(),
       child: MaterialApp.router(
-        title: 'E-Commerce App',
+        title: 'RUPPTECH',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,

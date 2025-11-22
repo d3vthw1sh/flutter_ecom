@@ -10,7 +10,16 @@ class ProductService {
   Future<List<Product>> getProducts() async {
     try {
       final response = await _apiService.dio.get(ApiConstants.products);
-      final List<dynamic> data = response.data;
+      
+      List<dynamic> data;
+      if (response.data is Map<String, dynamic> && response.data.containsKey('products')) {
+        data = response.data['products'];
+      } else if (response.data is List) {
+        data = response.data;
+      } else {
+        data = [];
+      }
+      
       return data.map((json) => Product.fromJson(json)).toList();
     } catch (e) {
       rethrow;

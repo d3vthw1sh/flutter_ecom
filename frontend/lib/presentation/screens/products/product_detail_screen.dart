@@ -6,6 +6,7 @@ import '../../../logic/blocs/product_detail/product_detail_state.dart';
 import '../../../logic/blocs/cart/cart_bloc.dart';
 import '../../../logic/blocs/cart/cart_event.dart';
 import '../../../core/utils.dart';
+import '../../../core/constants.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   final String productId;
@@ -96,7 +97,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             },
                             itemBuilder: (context, index) {
                               return Image.network(
-                                product.images[index],
+                                ApiConstants.resolveImageUrl(product.images[index]),
                                 fit: BoxFit.cover,
                                 errorBuilder: (context, error, stackTrace) {
                                   return Container(

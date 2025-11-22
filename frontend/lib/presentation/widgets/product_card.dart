@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../data/models/product.dart';
 import '../../core/utils.dart';
+import '../../core/constants.dart';
 
 class ProductCard extends StatelessWidget {
   final Product product;
@@ -34,7 +35,7 @@ class ProductCard extends StatelessWidget {
                     ),
                     child: product.images.isNotEmpty
                         ? Image.network(
-                            product.images.first,
+                            ApiConstants.resolveImageUrl(product.images.first),
                             width: double.infinity,
                             fit: BoxFit.cover,
                             errorBuilder: (context, error, stackTrace) {

@@ -1,5 +1,12 @@
+import 'dart:io';
+
 class ApiConstants {
-  static const String baseUrl = 'http://localhost:5000';
+  static String get baseUrl {
+    if (Platform.isAndroid) {
+      return 'http://10.0.2.2:5001';
+    }
+    return 'http://localhost:5001';
+  }
 
   // Auth
   static const String login = '/api/users/login';
@@ -19,4 +26,14 @@ class ApiConstants {
 
   // Stripe
   static const String createCheckoutSession = '/api/stripe/create-checkout-session';
+
+  static String resolveImageUrl(String path) {
+    if (path.startsWith('http')) {
+      if (Platform.isAndroid && path.contains('localhost')) {
+        return path.replaceAll('localhost', '10.0.2.2');
+      }
+      return path;
+    }
+    return '$baseUrl$path';
+  }
 }

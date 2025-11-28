@@ -5,6 +5,7 @@ import '../../../logic/blocs/cart/cart_bloc.dart';
 import '../../../logic/blocs/cart/cart_state.dart';
 import '../../../data/services/stripe_service.dart';
 import '../../../core/utils.dart';
+import '../../widgets/app_appbar.dart';
 
 class CheckoutScreen extends StatefulWidget {
   const CheckoutScreen({super.key});
@@ -106,8 +107,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Checkout'),
+      appBar: const AppAppBar(
+        title: 'Checkout',
+        showBack: true,
+        showCart: false,
       ),
       body: Stack(
         children: [

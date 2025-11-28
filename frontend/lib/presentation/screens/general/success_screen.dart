@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../logic/blocs/cart/cart_bloc.dart';
 import '../../../logic/blocs/cart/cart_event.dart';
+import '../../widgets/app_appbar.dart';
 
 class SuccessScreen extends StatefulWidget {
   const SuccessScreen({super.key});
@@ -21,6 +22,10 @@ class _SuccessScreenState extends State<SuccessScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: const AppAppBar(
+        title: 'Order Confirmed',
+        showBack: false,
+      ),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(24.0),

@@ -6,6 +6,9 @@ import '../../../logic/blocs/cart/cart_state.dart';
 import '../../../core/utils.dart';
 import '../../widgets/cart_item.dart';
 
+import '../../widgets/app_appbar.dart';
+import '../../widgets/bottom_nav.dart';
+
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
 
@@ -23,42 +26,9 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Shopping Cart'),
-        actions: [
-          BlocBuilder<CartBloc, CartState>(
-            builder: (context, state) {
-              if (state is CartLoaded && state.items.isNotEmpty) {
-                return IconButton(
-                  icon: const Icon(Icons.delete_outline),
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (dialogContext) => AlertDialog(
-                        title: const Text('Clear Cart'),
-                        content: const Text('Are you sure you want to clear the cart?'),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.pop(dialogContext),
-                            child: const Text('Cancel'),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              context.read<CartBloc>().add(ClearCart());
-                              Navigator.pop(dialogContext);
-                            },
-                            child: const Text('Clear'),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                );
-              }
-              return const SizedBox.shrink();
-            },
-          ),
-        ],
+      appBar: const AppAppBar(
+        title: 'Shopping Cart',
+        showBack: false,
       ),
       body: BlocBuilder<CartBloc, CartState>(
         builder: (context, state) {
@@ -184,6 +154,7 @@ class _CartScreenState extends State<CartScreen> {
           return const SizedBox.shrink();
         },
       ),
+      bottomNavigationBar: const BottomNavBar(currentIndex: 1),
     );
   }
 }

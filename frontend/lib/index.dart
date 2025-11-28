@@ -74,6 +74,8 @@ export 'presentation/widgets/product_card.dart';
 export 'presentation/widgets/cart_item.dart';
 export 'presentation/widgets/custom_button.dart';
 export 'presentation/widgets/custom_field.dart';
+export 'presentation/widgets/app_appbar.dart';
+export 'presentation/widgets/bottom_nav.dart';
 
 // Core
 export 'core/constants.dart';

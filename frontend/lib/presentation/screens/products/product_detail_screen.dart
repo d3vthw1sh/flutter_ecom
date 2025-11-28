@@ -8,6 +8,8 @@ import '../../../logic/blocs/cart/cart_event.dart';
 import '../../../core/utils.dart';
 import '../../../core/constants.dart';
 
+import '../../widgets/app_appbar.dart';
+
 class ProductDetailScreen extends StatefulWidget {
   final String productId;
   
@@ -29,16 +31,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Product Details'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.shopping_cart),
-            onPressed: () {
-              Navigator.pushNamed(context, '/cart');
-            },
-          ),
-        ],
+      appBar: const AppAppBar(
+        title: 'Product Details',
+        showBack: true,
       ),
       body: BlocBuilder<ProductDetailBloc, ProductDetailState>(
         builder: (context, state) {

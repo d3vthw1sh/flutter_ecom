@@ -32,7 +32,7 @@ class AuthService {
       final response = await _apiService.dio.post(
         ApiConstants.register,
         data: {
-          'username': username,
+          'name': username,  // Backend expects 'name' not 'username'
           'email': email,
           'password': password,
         },

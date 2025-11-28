@@ -5,6 +5,7 @@ import '../../../logic/blocs/orders/orders_bloc.dart';
 import '../../../logic/blocs/orders/orders_event.dart';
 import '../../../logic/blocs/orders/orders_state.dart';
 import '../../../core/utils.dart';
+import '../../widgets/app_appbar.dart';
 
 class OrderHistoryScreen extends StatefulWidget {
   const OrderHistoryScreen({super.key});
@@ -27,8 +28,9 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Order History'),
+      appBar: const AppAppBar(
+        title: 'Order History',
+        showBack: true,
       ),
       body: BlocBuilder<OrdersBloc, OrdersState>(
         builder: (context, state) {

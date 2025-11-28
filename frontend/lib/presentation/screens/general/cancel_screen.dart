@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../widgets/app_appbar.dart';
 
 class CancelScreen extends StatelessWidget {
   const CancelScreen({super.key});
@@ -6,6 +7,10 @@ class CancelScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: const AppAppBar(
+        title: 'Payment Cancelled',
+        showBack: false,
+      ),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
